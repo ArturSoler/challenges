@@ -24,4 +24,10 @@ class Week2FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
       decode(Week1.encode(list)) should be (list)
     }
   }
+
+  "encodeDirect (P13)" should "behave as P10" in {
+    forAll { (list: List[Boolean]) =>
+      encodeDirect(list) should be (Week1.encode(list))
+    }
+  }
 }
