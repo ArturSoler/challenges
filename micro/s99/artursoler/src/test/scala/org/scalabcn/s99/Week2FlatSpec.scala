@@ -42,4 +42,21 @@ class Week2FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
       deduplicate(duplicate(list)) should be (list)
     }
   }
+
+  "duplicateN (P15)" should "duplicate each entry in the list N times" in {
+    forAll { (list: List[Int], n: Int) =>
+      if(n > 0 && n < 10000)
+      {
+        def deduplicateN[T](xs: List[T]): List[T] = xs match {
+          case Nil => Nil
+          case _ =>
+            val (step, rest) = xs splitAt n
+            step.takeWhile(_ == step.head) should be (step)
+            step.head :: deduplicateN(rest)
+        }
+
+        deduplicateN(duplicateN(n, list)) should be (list)
+      }
+    }
+  }
 }

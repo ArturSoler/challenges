@@ -18,4 +18,6 @@ object Week2 {
   }
 
   def duplicate[T](xs: List[T]) = xs flatMap (List.fill(2)(_))
+
+  def duplicateN[T](n: Int, xs: List[T]) = xs flatMap (List.fill(n)(_))
 }
