@@ -16,4 +16,6 @@ object Week2 {
       val (take, drop) = xs.span(_ == x.head)
       (take.length, take.head) :: encodeDirect(drop)
   }
+
+  def duplicate[T](xs: List[T]) = xs flatMap (List.fill(2)(_))
 }

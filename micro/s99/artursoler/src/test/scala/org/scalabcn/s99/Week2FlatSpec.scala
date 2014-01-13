@@ -30,4 +30,16 @@ class Week2FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
       encodeDirect(list) should be (Week1.encode(list))
     }
   }
+
+  "duplicate (P14)" should "duplicate each entry in the original list" in {
+    forAll { (list: List[Int]) =>
+      def deduplicate[T](xs: List[T]): List[T] = xs match {
+        case Nil => Nil
+        case y1 :: y2 :: ys if (y1 == y2) => y1 :: deduplicate(ys)
+        case _ => throw new IllegalArgumentException
+      }
+
+      deduplicate(duplicate(list)) should be (list)
+    }
+  }
 }
