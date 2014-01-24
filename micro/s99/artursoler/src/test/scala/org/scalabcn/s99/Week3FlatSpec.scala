@@ -35,4 +35,15 @@ class Week3FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
     }
   }
 
+  "lotto (P24)" should "draw N different random numbers from the set 1..M" in {
+    forAll { (max: Int) =>
+      val top = if (max == Int.MinValue) 0 else math.abs(max) min 10000
+      val numElements = Random.nextInt(10) min top
+      println(s"going at it with $top ($max), $numElements")
+      val selected = lotto(numElements, top)
+      selected.length should be (numElements)
+      selected map (x => x > 0 && x <= top) forall  (_ == true) should be (true)
+      selected.toSet.size should be (numElements)
+    }
+  }
 }
