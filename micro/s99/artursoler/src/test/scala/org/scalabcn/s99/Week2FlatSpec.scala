@@ -85,4 +85,18 @@ class Week2FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
     }
   }
 
+  "rotate (P19)" should "rotate a list the given number of elements" in {
+    rotate(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should be
+    List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'a, 'b, 'c)
+
+    rotate(-2, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should be
+    List('j, 'k, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i)
+
+    forAll { (left: List[Int], right: List[Int]) =>
+      val joined = left ::: right
+      val rotated = right ::: left
+      rotate(left.length, joined) should be (rotated)
+      rotate(-right.length, joined) should be (rotated)
+    }
+  }
 }

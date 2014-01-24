@@ -43,4 +43,8 @@ object Week2 {
     case (_, _, _ :: xs) => slice(start-1, end-1, xs)
     case (_, _, Nil) => Nil
   }
+
+  def rotate[T](n: Int, xs: List[T]): List[T] =
+    if (n >= 0) xs.drop(n) ::: xs.take(n)
+    else xs.takeRight(-n) ::: xs.dropRight(-n)
 }
