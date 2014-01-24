@@ -21,4 +21,22 @@ object Week3 {
   def lotto(num: Int, top: Int) = randomSelect(num, range(1, top))
 
   def randomPermute(xs: List[Int]) = randomSelect(xs.length, xs)
+
+  def combinations[T](n: Int, xs: List[T]): List[List[T]] = {
+    def inner(n: Int, xs: List[T]): (Boolean, List[List[T]]) = (n, xs) match {
+      case (0, _) => (true, List(Nil))
+      case (_, Nil) => (false, List(Nil))
+      case (_, y :: ys) =>
+        val (w_valid, w_result) = inner(n-1, ys)
+        val (wo_valid, wo_result) = inner(n, ys)
+        (w_valid, wo_valid) match {
+          case (true, true) => (true, (w_result map (y :: _)) ::: wo_result)
+          case (true, false) => (true, w_result map (y :: _))
+          case (false, true) => (true, wo_result)
+          case (false, false) => (false, List(Nil))
+        }
+    }
+    val (_, result) = inner(n, xs)
+    result
+  }
 }

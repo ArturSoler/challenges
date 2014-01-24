@@ -52,4 +52,10 @@ class Week3FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
       randomPermute(list).sorted should be (list.sorted)
     }
   }
+
+  "combinations (P26)" should "generate the combinations of K distinct objects chosen from the N elements of a list" in {
+    combinations(0, Nil) should be (List(Nil))
+    combinations(3, List(1, 2, 3, 4)) should be (List(List(1, 2, 3), List(1, 2, 4), List(1, 3, 4), List(2, 3, 4)))
+  }
+
 }
