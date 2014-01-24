@@ -20,4 +20,13 @@ object Week2 {
   def duplicate[T](xs: List[T]) = xs flatMap (List.fill(2)(_))
 
   def duplicateN[T](n: Int, xs: List[T]) = xs flatMap (List.fill(n)(_))
+
+  def drop[T](n: Int, xs: List[T]) = {
+    def inner(counter: Int, xs: List[T]): List[T] = (counter, xs) match {
+      case (_, Nil) => Nil
+      case (0, x :: xs) => inner(n, xs)
+      case (_, x :: xs) => x :: inner(counter - 1, xs)
+    }
+    inner(n, xs)
+  }
 }

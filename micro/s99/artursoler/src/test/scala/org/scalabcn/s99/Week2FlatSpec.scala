@@ -59,4 +59,10 @@ class Week2FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
       }
     }
   }
+
+  "drop (P16)" should "drop every nth element in the input list" in {
+    drop(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should be
+    List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k)
+  }
+
 }
