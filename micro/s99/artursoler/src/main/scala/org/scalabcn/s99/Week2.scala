@@ -36,4 +36,11 @@ object Week2 {
       val (first, second) = split(n-1, xs.tail)
       (xs.head :: first, second)
   }
+
+  def slice[T](start: Int, end: Int, xs: List[T]): List[T] = (start, end, xs) match { // xs.take(end).drop(start)
+    case (0, 0, _) => Nil
+    case (0, _, x :: xs) => x :: slice(0, end - 1, xs)
+    case (_, _, _ :: xs) => slice(start-1, end-1, xs)
+    case (_, _, Nil) => Nil
+  }
 }

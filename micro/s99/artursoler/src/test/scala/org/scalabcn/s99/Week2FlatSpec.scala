@@ -74,4 +74,15 @@ class Week2FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
       split(left.length, joined) should be (left, right)
     }
   }
+
+  "slice (P18)" should "produce a slice of the input list with the given indexes" in {
+    Week2.slice(3, 7, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should be
+    List('d, 'e, 'f, 'g)
+
+    forAll { (left: List[Int], slice: List[Int], right: List[Int]) =>
+      val joined = left ::: slice ::: right
+      Week2.slice(left.length, left.length+slice.length, joined) should be (slice)
+    }
+  }
+
 }
