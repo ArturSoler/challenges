@@ -99,4 +99,14 @@ class Week2FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
       rotate(-right.length, joined) should be (rotated)
     }
   }
+
+  "removeAt (P20)" should "return the list and the removed element in a tuple" in {
+    removeAt(1, List('a, 'b, 'c, 'd)) should be (List('a, 'c, 'd),'b)
+
+    forAll { (left: List[Int], elem: Int, right: List[Int]) =>
+      val joined = left ::: elem :: right
+      val removed = left ::: right
+      removeAt(left.length, joined) should be (removed, elem)
+    }
+  }
 }

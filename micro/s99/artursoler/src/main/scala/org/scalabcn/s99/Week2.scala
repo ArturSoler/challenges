@@ -47,4 +47,11 @@ object Week2 {
   def rotate[T](n: Int, xs: List[T]): List[T] =
     if (n >= 0) xs.drop(n) ::: xs.take(n)
     else xs.takeRight(-n) ::: xs.dropRight(-n)
+
+  def removeAt[T](n: Int, xs: List[T]): (List[T], T) = n match {
+    case 0 => (xs.tail, xs.head)
+    case _ =>
+      val (remaining, value) = removeAt(n-1, xs.tail)
+      (xs.head :: remaining, value)
+  }
 }
