@@ -19,4 +19,6 @@ object Week3 {
   def randomSelect[T](n: Int, xs: List[T]) = Random.shuffle(xs) take n
 
   def lotto(num: Int, top: Int) = randomSelect(num, range(1, top))
+
+  def randomPermute(xs: List[Int]) = randomSelect(xs.length, xs)
 }

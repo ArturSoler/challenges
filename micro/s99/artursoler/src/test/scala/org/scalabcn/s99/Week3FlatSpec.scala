@@ -46,4 +46,10 @@ class Week3FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
       selected.toSet.size should be (numElements)
     }
   }
+
+  "randomPermute (P25)" should "generate a random permutation of the elements of a list" in {
+    forAll { (list: List[Int]) =>
+      randomPermute(list).sorted should be (list.sorted)
+    }
+  }
 }
