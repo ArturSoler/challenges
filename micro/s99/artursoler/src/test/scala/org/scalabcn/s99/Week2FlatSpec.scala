@@ -65,4 +65,13 @@ class Week2FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
     List('a, 'b, 'd, 'e, 'g, 'h, 'j, 'k)
   }
 
+  "split (P17)" should "split the input list in 2 lists, the first one being as long as indicated by the parameter" in {
+    split(3, List('a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k)) should be
+    (List('a, 'b, 'c),List('d, 'e, 'f, 'g, 'h, 'i, 'j, 'k))
+
+    forAll { (left: List[Int], right: List[Int]) =>
+      val joined = left ::: right
+      split(left.length, joined) should be (left, right)
+    }
+  }
 }

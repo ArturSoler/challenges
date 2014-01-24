@@ -29,4 +29,11 @@ object Week2 {
     }
     inner(n, xs)
   }
+
+  def split[T](n: Int, xs: List[T]): (List[T], List[T]) = n match {
+    case 0 => (Nil, xs)
+    case _ =>
+      val (first, second) = split(n-1, xs.tail)
+      (xs.head :: first, second)
+  }
 }
