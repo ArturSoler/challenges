@@ -3,6 +3,7 @@ package org.scalabcn.s99
 import org.scalatest.{Matchers, FlatSpec}
 import org.scalatest.prop.PropertyChecks
 import org.scalabcn.s99.Week3._
+import scala.util.Random
 
 class Week3FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
   "insertAt (P21)" should "insert an element at a given position into a list" in {
@@ -24,4 +25,14 @@ class Week3FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
       range(min, max) should be ((min to max).toList)
     }
   }
+
+  "randomSelect (P23)" should "extract a given number of randomly selected elements from a list" in {
+    forAll { (list: List[Int]) =>
+      val numElements = Random.nextInt(5) min list.length
+      val selected = randomSelect(numElements, list)
+      selected.length should be (numElements)
+      selected map (list contains _) forall  (_ == true) should be (true)
+    }
+  }
+
 }

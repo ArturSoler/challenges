@@ -1,5 +1,7 @@
 package org.scalabcn.s99
 
+import scala.util.Random
+
 object Week3 {
   def insertAt[T](elem: T, pos: Int, xs: List[T]): List[T] = pos match {
     case 0 => elem :: xs
@@ -13,4 +15,6 @@ object Week3 {
     else
       Nil
   }
+
+  def randomSelect[T](n: Int, xs: List[T]) = Random.shuffle(xs) take n
 }
