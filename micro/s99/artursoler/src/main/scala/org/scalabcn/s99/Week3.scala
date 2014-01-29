@@ -39,4 +39,18 @@ object Week3 {
     val (_, result) = inner(n, xs)
     result
   }
+
+  def group[T](groupSizes: List[Int], xs: List[T]): List[List[List[T]]] = groupSizes match {
+    case Nil => List(List(Nil))
+    case y :: Nil =>
+      require(y == xs.length)
+      List(List(xs))
+    case y :: ys =>
+      val currentGroupCombinations: List[List[T]] = combinations(y, xs)
+      val result: List[List[List[T]]] = for {
+        current: List[T] <- currentGroupCombinations
+        others: List[List[T]] <- group[T](ys, (xs.toSet diff current.toSet).toList)
+      } yield (current :: others)
+      result
+  }
 }

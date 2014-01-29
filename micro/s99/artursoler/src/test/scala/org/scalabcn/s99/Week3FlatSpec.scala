@@ -39,7 +39,6 @@ class Week3FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
     forAll { (max: Int) =>
       val top = if (max == Int.MinValue) 0 else math.abs(max) min 10000
       val numElements = Random.nextInt(10) min top
-      println(s"going at it with $top ($max), $numElements")
       val selected = lotto(numElements, top)
       selected.length should be (numElements)
       selected map (x => x > 0 && x <= top) forall  (_ == true) should be (true)
@@ -56,6 +55,21 @@ class Week3FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
   "combinations (P26)" should "generate the combinations of K distinct objects chosen from the N elements of a list" in {
     combinations(0, Nil) should be (List(Nil))
     combinations(3, List(1, 2, 3, 4)) should be (List(List(1, 2, 3), List(1, 2, 4), List(1, 3, 4), List(2, 3, 4)))
+    forAll { (list: List[Int]) =>
+      combinations(0, list) should be (List(Nil))
+//      combinations(1, list) should be (list map (List(_)))
+    }
   }
 
+  "group (P27)" should "group the elements of a set into disjoint subsets" in {
+    forAll { (list: List[Int] ) =>
+      if (list.length > 5 && list.toSet.size == list.length) {
+        val sizes = List(2, 3, list.length-5)
+        val groups = group(sizes, list)
+        groups map (_.length) forall (_ == 3) should be (true)
+        groups map (_.flatten) map (_.length) forall (_ == list.length) should be (true)
+        groups map (group => group map (_.toSet)) map (group => (group.head /: group)(_ union _)) forall (_ == list.toSet) should be (true)
+      }
+    }
+  }
 }
