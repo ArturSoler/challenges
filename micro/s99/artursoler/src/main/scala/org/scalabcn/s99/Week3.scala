@@ -47,10 +47,15 @@ object Week3 {
       List(List(xs))
     case y :: ys =>
       val currentGroupCombinations: List[List[T]] = combinations(y, xs)
-      val result: List[List[List[T]]] = for {
+      for {
         current: List[T] <- currentGroupCombinations
         others: List[List[T]] <- group[T](ys, (xs.toSet diff current.toSet).toList)
       } yield (current :: others)
-      result
+  }
+
+  def lsort[T](xs: List[List[T]]): List[List[T]] = xs sortWith(_.length < _.length)
+  def lsortFreq[T](xs: List[List[T]]): List[List[T]] = {
+    val freqs = xs groupBy (_.length) mapValues (_.length)
+    xs sortWith ((x, y) => freqs(x.length) < freqs(y.length))
   }
 }

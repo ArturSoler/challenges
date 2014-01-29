@@ -72,4 +72,19 @@ class Week3FlatSpec  extends FlatSpec with Matchers with PropertyChecks {
       }
     }
   }
+
+  "lsort (P28)" should "sort a list of lists according to length of sublists, in increasing order" in {
+    val input = List(List('a, 'b, 'c), List('d, 'e), List('f, 'g, 'h), List('d, 'e), List('i, 'j, 'k, 'l), List('m, 'n), List('o))
+    val output = List(List('o), List('d, 'e), List('d, 'e), List('m, 'n), List('a, 'b, 'c), List('f, 'g, 'h), List('i, 'j, 'k, 'l))
+    lsort(input) should be (output)
+  }
+
+  "lsortFreq (P28)" should "sort a list of lists according to frequency of length of sublists" in {
+    val input = List(List('a, 'b, 'c), List('d, 'e), List('f, 'g, 'h), List('d, 'e), List('i, 'j, 'k, 'l), List('m, 'n), List('o))
+    val output = List(List('i, 'j, 'k, 'l), List('o), List('a, 'b, 'c), List('f, 'g, 'h), List('d, 'e), List('d, 'e), List('m, 'n))
+    lsortFreq(input) should be (output)
+  }
+
+
+
 }
